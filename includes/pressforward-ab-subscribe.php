@@ -3,15 +3,16 @@
 require_once(PF_AB_ROOT . "/includes/linkfinder/AB_subscription_builder.php");
 
 class PF_AB_Subscriber {
-	var $id;
 	   var $module_dir;
 	   var $module_url;
+	   var $id;
 
 	/**
 	 * Constructor
 	 */
 	private function __construct() {
 	    $this->start();
+		$this->id = 'pressforward-ab-subscribe';
 	    add_action( 'wp_ajax_refresh_ab_feeds', array( $this, 'refresh_ab_feeds_callback' ) );
 	    add_action( 'wp_ajax_finish_ab_feeds', array( $this, 'finish_ab_feeds_callback' ) );
 	    if (is_admin()){
@@ -44,16 +45,6 @@ class PF_AB_Subscriber {
 	    add_action( 'pf_admin_op_page', array( $this, 'admin_op_page' ) );
 	    add_action( 'pf_admin_op_page_save', array( $this, 'admin_op_page_save' ) );
 
-	}
-
-	function setup_module_hooked($modules){
-
-	    $modules[] = array(
-					'slug' => $module_dir,
-					'class' => get_called_class()
-	    );
-
-	    return $modules;
 	}
 
 	/**
@@ -103,7 +94,7 @@ class PF_AB_Subscriber {
 
 	function module_setup(){
 	    $mod_settings = array(
-		'name' => $this->id . ' Module',
+		'name' => 'Academic Blogs Subscriber Module',
 		'slug' => $this->id,
 		'description' => 'This module provides the ability to subscribe to blogs listed on the academic blogs wiki.',
 		'thumbnail' => '',
@@ -451,9 +442,9 @@ class PF_AB_Subscriber {
 
 	    wp_enqueue_script( 'jquery-ui' );
 	    wp_enqueue_script( 'jquery-ui-progressbar' );
-	    wp_enqueue_script( 'ab-refresh-progressbar', PF_AB_FILE_PATH . 'assets/js/progressbar.js', array( 'jquery', 'jquery-ui-progressbar') );
-	    wp_enqueue_script( 'ab-dropdowns', PF_AB_FILE_PATH . 'assets/js/dropdowns.js', array( 'jquery' ) );
-	    wp_enqueue_script( 'handle-ab-subs', PF_AB_FILE_PATH . 'assets/js/handle-ab-subs.js', array( 'jquery' ) );
-	    wp_enqueue_style( 'ab-refresh-progressbar', PF_AB_FILE_PATH . 'assets/css/progressbar.css' );
+	    wp_enqueue_script( 'ab-refresh-progressbar', PF_AB_URL . 'assets/js/progressbar.js', array( 'jquery', 'jquery-ui-progressbar') );
+	    wp_enqueue_script( 'ab-dropdowns', PF_AB_URL . 'assets/js/dropdowns.js', array( 'jquery' ) );
+	    wp_enqueue_script( 'handle-ab-subs', PF_AB_URL . 'assets/js/handle-ab-subs.js', array( 'jquery' ) );
+	    wp_enqueue_style( 'ab-refresh-progressbar', PF_AB_URL . 'assets/css/progressbar.css' );
 	}
 }
