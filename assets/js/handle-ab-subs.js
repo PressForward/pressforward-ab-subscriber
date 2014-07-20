@@ -6,7 +6,7 @@ jQuery(window).load(function() {
 	var ab_cats 		= jQuery("#ab-cats").val();
 	var ab_subcats  	= jQuery("#ab-subcats").val(); 
 	var ab_blogs 		= jQuery("#ab-blogs").val(); 
-	alert('Academic blogs loaded in.');
+	alert('Academic blogs loaded in. Please wait while we load feeds.');
     jQuery.post(ajaxurl, {
 			action: 'ab_add_validator',
 			ab_cats: ab_cats,
